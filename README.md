@@ -4,10 +4,10 @@
 
 ### Introduction
 
-ArithPartition is a dynamic parallel framework with arithmetic variable-level partitioning for SMT solving in arithmetic theories, which is proposed in the paper "Distributed SMT Solving Based on Dynamic Variable-level Partitioning."
+ArithPartition is a dynamic parallel framework with arithmetic variable-level partitioning for SMT solving, which is proposed in the paper "Distributed SMT Solving Based on Dynamic Variable-level Partitioning."
+Our method is focused on arithmetic theories and can be configured with SMT solvers that accept the `smt2` input format.
 
-[![pFmSkTI.png](https://s11.ax1x.com/2024/01/24/pFmSkTI.png)](https://imgse.com/i/pFmSkTI)
-
+<!-- [![pFmSkTI.png](https://s11.ax1x.com/2024/01/24/pFmSkTI.png)](https://imgse.com/i/pFmSkTI) -->
 
 ### Requirements
 
@@ -21,24 +21,21 @@ x86_64， Linux with GLIBC version >= 2.29
 Here is an example:
 
 ```bash
-cd solver
-
-./ArithPartition \
---file ../test-instances/lia-unsat-17.8.smt2 \
---output-dir  ../test-instances/test-output-dir/ \
---partitioner  ./partitioner/partitioner \
---solver ./base-solvers/cvc5-1.0.8 \
+./solver/ArithPartition \
+--file test-instances/lia-unsat-17.8.smt2 \
+--output-dir test-instances/test-output-dir/ \
+--partitioner solver/partitioner/partitioner \
+--solver solver/base-solvers/cvc5-1.0.8 \
 --max-running-tasks 8 \
 --time-limit 1200
 ```
 
-If nothing unexpected happens, it will output as follows:
-
-The first line is the solution result, and the second is the solving time.
+It will output as follows format:
+The first line is the solution result, and the second is the run time.
 
 ```
 unsat
-17.75242280960083
+17.056430101394653
 ```
 
 The following are the explanations for each parameter:
@@ -48,14 +45,14 @@ The following are the explanations for each parameter:
 | ------------------- | ------------------------------------------------------------ |
 | --file              | The path to SMT instance, ending with .smt2.                 |
 | --output-dir        | The path to the output folder for temporary and result files. |
-| --partitioner       | The path of the partitioner, which is located in this location: solver/partitioner/partitioner. |
+| --partitioner       | The partitioner's path is located in "solver/partitioner/partitioner." |
 | --solver            | The path to the base solver. Three SMT solvers compared in the paper are placed in the solver/base-solvers directory. You can also use any other solver with a standard input and output format. |
 | --max-running-tasks | The maximum number of working processes.                     |
 | --time-limit        | Time limit returns 'unknown' if it exceeds the limit.       |
 
 ## Experiment Results
 
-The dir `experiment-results` contains all the experimental results mentioned in the paper "Distributed SMT Solving Based on Dynamic Variable-level Partitioning."
+The directory `experiment-results` contains all the experimental results mentioned in the paper "Distributed SMT Solving Based on Dynamic Variable-level Partitioning."
 
 There are four theories in this dir, and each dir has a sum-up file `results-sumup.txt` in a table format like this:
 
@@ -83,7 +80,7 @@ There are four theories in this dir, and each dir has a sum-up file `results-sum
 
 ## Test Instances
 
-Test instances are named in the format `theory-result_state-cost_time.smt2`, storing in `test-instances` dir.
+Test instances are named in the format `theory-result_state-cost_time.smt2`, stored in `test-instances` dir.
 
 `test-output-dir` is the temporary dir for instance-testing output, resulting in `lia-unsat-17.8.smt2`.
 
