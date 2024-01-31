@@ -84,3 +84,7 @@ Test instances are named in the format `theory-result_state-cost_time.smt2`, sto
 
 `test-output-dir` is the temporary dir for instance-testing output, resulting in `lia-unsat-17.8.smt2`.
 
+
+## All Files Archive
+
+`all-files.tar.gz` is the compressed file of this Supplementary folder, convenient for download and reference.
